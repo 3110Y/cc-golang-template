@@ -1,0 +1,1 @@
+# cc-golang-template
