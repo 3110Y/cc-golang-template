@@ -24,7 +24,7 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_PORT=${POSTGRES_PORT}
     volumes:
-      - profile-database:/var/lib/postgresql/data:delegated
+      - <SERVICE>-database:/var/lib/postgresql/data:delegated
     networks:
       - database
 
@@ -34,12 +34,12 @@ services:
     ports:
       - ${POSTGRES_PORT_EXTERNAL}:${POSTGRES_PORT}
     volumes:
-      - profile-database-test:/var/lib/postgresql/data:delegated
+      - <SERVICE>-database-test:/var/lib/postgresql/data:delegated
     networks:
       - database-test
 
   dev:
-    container_name: profile-dev
+    container_name: <SERVICE>-dev
     build:
       context: .
       dockerfile: ./build/dockerfiles/golang/Dockerfile
@@ -68,7 +68,7 @@ services:
       - database
 
   prod:
-    container_name: profile
+    container_name: <SERVICE>
     build:
       context: .
       dockerfile: ./build/dockerfiles/golang/Dockerfile
@@ -95,7 +95,7 @@ services:
       - database
 
   test:
-    container_name: profile-test
+    container_name: <SERVICE>-test
     build:
       context: .
       dockerfile: ./build/dockerfiles/golang/Dockerfile
